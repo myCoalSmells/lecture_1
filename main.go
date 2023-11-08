@@ -15,13 +15,14 @@ func main() {
 			http.Error(rw, "oops", http.StatusBadRequest)
 			return
 		}
-		log.Printf("Data %s\n", d)
-		fmt.Fprintf(rw, "Hello %s\n", d)
+		log.Printf("Data Received: %s\n", d)
+		fmt.Fprintf(rw, "Data returned: %s\n", d)
 	})
 
 	http.HandleFunc("/goodbye", func(http.ResponseWriter, *http.Request) {
 		log.Println("Goodbye World")
 	})
 
+	log.Println("Listening on port 9090...")
 	http.ListenAndServe(":9090", nil)
 }

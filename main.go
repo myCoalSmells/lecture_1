@@ -12,12 +12,12 @@ import (
 
 func main() {
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
-	hh := handlers.NewHello(l)
+	ph := handlers.NewProducts(l)
 	gh := handlers.NewGoodBye(l)
 	dc := handlers.NewDonCare(l)
 
 	sm := http.NewServeMux()
-	sm.Handle("/", hh)
+	sm.Handle("/", ph)
 	sm.Handle("/goodbye", gh)
 	sm.Handle("/donCare", dc)
 
@@ -47,3 +47,6 @@ func main() {
 	tc, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	server.Shutdown(tc)
 }
+
+// when a request comes to our server at the root, it's going to call our ph handler.
+// the products servehttp method is going to be pinged now
